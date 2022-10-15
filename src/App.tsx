@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import './App.sass'
+import { Landing, NotFound } from './pages'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const location = useLocation()
+
+	return (
+		<div className="App">
+			<div style={{ display: 'unset' }}>
+				<div className="top-blurbs w-100">
+					<div className="appreciation">Thank you for your patronage during the lockdown!</div>
+				</div>
+				<header className="main-header">
+					<span style={{ fontSize: "1000%" }}>Home</span>
+
+				</header>
+			</div>
+			<div className="main-content">
+				<Routes location={location} key={location.pathname}>
+					<Route path="/" element={<Landing />}></Route>
+					<Route path="*" element={<NotFound />}></Route>
+				</Routes>
+			</div>
+		</div>
+	)
 }
 
-export default App;
+export default App

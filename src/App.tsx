@@ -8,20 +8,27 @@ function App() {
 
 	return (
 		<div className="App">
-			<div style={{ display: 'unset' }}>
-				<div className="top-blurbs w-100">
-					<div className="appreciation">Thank you for your patronage during the lockdown!</div>
-				</div>
-				<header className="main-header">
-					<span style={{ fontSize: "1000%" }}>Home</span>
-
-				</header>
+			{/* <div className="App-top"> */}
+			<div className="top-blurbs w-100">
+				<div className="appreciation">Thank you for your patronage during the lockdown! &#x1F637;</div>
 			</div>
-			<div className="main-content">
-				<Routes location={location} key={location.pathname}>
-					<Route path="/" element={<Landing />}></Route>
-					<Route path="*" element={<NotFound />}></Route>
-				</Routes>
+
+			{
+				location.pathname === '/' && (
+					<Landing.Splash />
+				)
+			}
+			<header className="main-header">
+				<span style={{ fontSize: "200%" }}>Home</span>
+			</header>
+			{/* </div> */}
+			<div>
+				<main className="main-content">
+					<Routes location={location} key={location.pathname}>
+						<Route path="/" element={<Landing />}></Route>
+						<Route path="*" element={<NotFound />}></Route>
+					</Routes>
+				</main>
 			</div>
 		</div>
 	)

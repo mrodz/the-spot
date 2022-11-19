@@ -1,6 +1,11 @@
 import "./Landing.sass";
 
-export const Landing = () => {
+type LandingElement = {
+	(): JSX.Element
+	Splash: () => JSX.Element
+}
+
+const Landing: LandingElement = () => {
 	return (
 		<div className="Landing">
 			<div className="w-100">
@@ -77,3 +82,13 @@ export const Landing = () => {
 		</div>
 	)
 }
+
+Landing.Splash = () => {
+	return (
+		<div className="rectangles">
+			<div className="rec-1"></div>
+		</div>
+	)
+}
+
+export { Landing }

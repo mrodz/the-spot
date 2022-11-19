@@ -3,3 +3,7 @@ body {
 	min-height: 100%;
 	font-family: Gotham A,Gotham B,sans-serif;
 }
+
+* {
+	overflow: visible;
+}

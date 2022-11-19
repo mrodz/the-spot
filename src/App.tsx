@@ -18,6 +18,7 @@ function App() {
 					<Landing.Splash />
 				)
 			}
+
 			<header className="main-header">
 				<span style={{ fontSize: "200%" }}>Home</span>
 			</header>

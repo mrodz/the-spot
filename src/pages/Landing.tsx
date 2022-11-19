@@ -85,8 +85,18 @@ const Landing: LandingElement = () => {
 
 Landing.Splash = () => {
 	return (
-		<div className="rectangles">
-			<div className="rec-1"></div>
+		<div className="splash-wrapper">
+			<div className="rectangles">
+				<div className="rec-1"></div>
+				<div className="rec-2"></div>
+			</div>
+			<div className="welcome-title">
+				<div id="title">The Spot</div>
+				<div id="subtitles">
+					<span>splash text &bull; goes here</span>
+					<span>line &bull; two</span>
+				</div>
+			</div>
 		</div>
 	)
 }

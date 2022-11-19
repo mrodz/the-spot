@@ -1,16 +1,127 @@
 .w-100
 	width: 100%
 
+$border-size: 7.5px
+@mixin border($color)
+	border: solid $color $border-size 
+
+@keyframes fade-in
+	0%
+		opacity: 0
+	100%
+		opacity: 1
+@mixin fade-in-dur($duration)
+	opacity: 0
+	animation: fade-in .7s $duration 1 forwards
+
 .rec-1
 	position: relative
-	left: 6rem
-	top: 4rem
+	left: 1rem
+	top: 2.5rem
 	width: 18rem
 	height: 24rem
-	background-color: red
+	@include border(red)
+
+.rec-2
+	position: relative
+	left: 12rem
+	top: -15rem
+	width: 18rem
+	height: 24rem
+	@include border(brown)
+
+.splash-wrapper
+	display: flex
+	flex-direction: row
 
 .rectangles
 	// display: flex
 	// flex-grow: 1
 	margin-top: 1.5rem
+	padding-left: 7rem
 	margin-bottom: 1.5rem  
+
+	@for $n from 1 through 2
+		& > div:nth-child(#{$n})
+			opacity: 0
+			animation-name:            fade-in,    hover
+			animation-duration:        .7s,        15s
+			animation-delay:           (1s + $n * .3s),  (.2s + $n * .6s)
+			animation-iteration-count: 1,          infinite
+			animation-timing-function: cubic-bezier(.87,0,.23,1.01),cubic-bezier(.87,0,.23,1.01)
+			@if $n % 2 == 0
+				animation-fill-mode:       forwards,   forwards
+			@else 
+				animation-fill-mode:       forwards,   backwards
+
+			// animation: fade-in .7s $duration 1 forwards
+			// animation: hover 5s ($n * .6s) infinite forwards
+			
+@keyframes smash-drop
+	0%
+		transform: translateY(-100vmax)
+	70%, 75%
+		transform: translateY(0px)
+	85%
+		transform: translateY(-50px)
+	100%
+		transform: translateY(0px)
+
+@keyframes hover
+	0%, 100%
+		transform: translateY(-16px)
+	50%
+		transform: translateY(16px) 
+
+@keyframes moving-gradient
+	0%
+		background-position: 0% 50%
+	50%
+		background-position: 100% 50%
+	100%
+		background-position: 0% 50%
+
+@keyframes blow-up
+	100%
+		transform: scale(120%)
+		
+.welcome-title
+	flex-grow: 1
+	display: flex
+	flex-direction: column
+	justify-content: center
+	align-items: flex-end
+	max-height: 100vh
+
+	& > *
+		margin-right: 12rem
+
+	& #title
+		animation: smash-drop 1s 1 cubic-bezier(.17,.67,.83,.67) forwards
+		font-size: 500%
+		text-transform: uppercase
+		background: linear-gradient(-45deg, #70301c, #4c353e, #744010, #9e4d21)
+		animation: moving-gradient 15s ease infinite
+		background-size: 400% 400%
+		padding: 1rem
+		padding-left: 2rem
+		padding-right: 2rem
+		color: #fff
+		font-family: 'Bree Serif', serif
+
+		&:hover
+			animation: blow-up .5s 0s 1 forwards
+
+
+	& #subtitles
+		margin-top: 1rem
+		display: flex
+		flex-direction: column
+		font-size: 150%
+		text-align: right
+		color: #918888
+
+		@for $n from 1 through 2
+			& > span:nth-child(#{$n})
+				@include fade-in-dur(.5s + ($n * 1s))
+			

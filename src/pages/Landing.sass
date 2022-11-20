@@ -33,10 +33,9 @@ $border-size: 7.5px
 .splash-wrapper
 	display: flex
 	flex-direction: row
+	max-height: 100vh
 
 .rectangles
-	// display: flex
-	// flex-grow: 1
 	margin-top: 1.5rem
 	padding-left: 7rem
 	margin-bottom: 1.5rem  
@@ -50,13 +49,10 @@ $border-size: 7.5px
 			animation-iteration-count: 1,          infinite
 			animation-timing-function: cubic-bezier(.87,0,.23,1.01),cubic-bezier(.87,0,.23,1.01)
 			@if $n % 2 == 0
-				animation-fill-mode:       forwards,   forwards
+				animation-fill-mode:       forwards,   both
 			@else 
-				animation-fill-mode:       forwards,   backwards
+				animation-fill-mode:       forwards,   both
 
-			// animation: fade-in .7s $duration 1 forwards
-			// animation: hover 5s ($n * .6s) infinite forwards
-			
 @keyframes smash-drop
 	0%
 		transform: translateY(-100vmax)
@@ -97,20 +93,20 @@ $border-size: 7.5px
 		margin-right: 12rem
 
 	& #title
-		animation: smash-drop 1s 1 cubic-bezier(.17,.67,.83,.67) forwards
 		font-size: 500%
 		text-transform: uppercase
 		background: linear-gradient(-45deg, #70301c, #4c353e, #744010, #9e4d21)
-		animation: moving-gradient 15s ease infinite
+		animation: smash-drop 1s 1 cubic-bezier(.17,.67,.83,.67) forwards, moving-gradient 15s ease infinite
 		background-size: 400% 400%
 		padding: 1rem
 		padding-left: 2rem
 		padding-right: 2rem
 		color: #fff
 		font-family: 'Bree Serif', serif
+		z-index: 5
 
 		&:hover
-			animation: blow-up .5s 0s 1 forwards
+			animation: smash-drop 1s 1 cubic-bezier(.17,.67,.83,.67) forwards, moving-gradient 15s ease infinite, blow-up .5s 0s 1 forwards
 
 
 	& #subtitles

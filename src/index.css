@@ -4,6 +4,37 @@ body {
 	font-family: Gotham A,Gotham B,sans-serif;
 }
 
-* {
-	overflow: visible;
+.center-h {
+	display: flex;
+	justify-content: center;
 }
+
+html {
+	scroll-behavior: smooth;
+	overflow-x: none
+}
+
+.w-100 {
+	width: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+  }
+  
+  /* Track */
+  /* ::-webkit-scrollbar-track { */
+	/* background: #f1f1f1; */
+	/* background: rgb(75, 54, 21); */
+  /*} */
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: hsl(37, 56%, 10%);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: hsl(37, 56%, 19%);;
+  }

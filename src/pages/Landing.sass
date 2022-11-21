@@ -1,57 +1,25 @@
-.w-100
-	width: 100%
-
-$border-size: 7.5px
-@mixin border($color)
-	border: solid $color $border-size 
-
 @keyframes fade-in
 	0%
 		opacity: 0
 	100%
 		opacity: 1
-@mixin fade-in-dur($duration)
+
+@mixin fade-in-dur($delay, $duration: .7s)
 	opacity: 0
-	animation: fade-in .7s $duration 1 forwards
-
-.rec-1
-	position: relative
-	left: 1rem
-	top: 2.5rem
-	width: 18rem
-	height: 24rem
-	@include border(red)
-
-.rec-2
-	position: relative
-	left: 12rem
-	top: -15rem
-	width: 18rem
-	height: 24rem
-	@include border(brown)
+	animation: fade-in $duration $delay 1 forwards
 
 .splash-wrapper
 	display: flex
 	flex-direction: row
-	max-height: 100vh
+	flex-grow: 1
 
-.rectangles
-	margin-top: 1.5rem
-	padding-left: 7rem
-	margin-bottom: 1.5rem  
-
-	@for $n from 1 through 2
-		& > div:nth-child(#{$n})
-			opacity: 0
-			animation-name:            fade-in,    hover
-			animation-duration:        .7s,        15s
-			animation-delay:           (1s + $n * .3s),  (.2s + $n * .6s)
-			animation-iteration-count: 1,          infinite
-			animation-timing-function: cubic-bezier(.87,0,.23,1.01),cubic-bezier(.87,0,.23,1.01)
-			@if $n % 2 == 0
-				animation-fill-mode:       forwards,   both
-			@else 
-				animation-fill-mode:       forwards,   both
+.splash-image
+	padding-left: 5rem
+	padding-right: 5rem
+	display: flex
+	justify-content: center
+	align-items: center
+	@include fade-in-dur(0s, 3s)
 
 @keyframes smash-drop
 	0%
@@ -80,6 +48,10 @@ $border-size: 7.5px
 @keyframes blow-up
 	100%
 		transform: scale(120%)
+
+@keyframes blow-down
+	100%
+		transform: scale(100%)
 		
 .welcome-title
 	flex-grow: 1
@@ -87,16 +59,18 @@ $border-size: 7.5px
 	flex-direction: column
 	justify-content: center
 	align-items: flex-end
-	max-height: 100vh
 
 	& > *
-		margin-right: 12rem
+		margin-right: 5rem
 
 	& #title
-		font-size: 500%
+		font-size: 600%
 		text-transform: uppercase
 		background: linear-gradient(-45deg, #70301c, #4c353e, #744010, #9e4d21)
-		animation: smash-drop 1s 1 cubic-bezier(.17,.67,.83,.67) forwards, moving-gradient 15s ease infinite
+		animation: smash-drop 1s 1 cubic-bezier(.17,.67,.83,.67) forwards, moving-gradient 15s ease infinite, //blow-down .5s 0s 1 forwards
+		
+		transition: all .5s
+
 		background-size: 400% 400%
 		padding: 1rem
 		padding-left: 2rem
@@ -106,7 +80,8 @@ $border-size: 7.5px
 		z-index: 5
 
 		&:hover
-			animation: smash-drop 1s 1 cubic-bezier(.17,.67,.83,.67) forwards, moving-gradient 15s ease infinite, blow-up .5s 0s 1 forwards
+			scale: 120%
+			animation: smash-drop 1s 1 cubic-bezier(.17,.67,.83,.67) forwards, moving-gradient 15s ease infinite, //blow-up .5s 0s 1 forwards
 
 
 	& #subtitles
@@ -120,4 +95,94 @@ $border-size: 7.5px
 		@for $n from 1 through 2
 			& > span:nth-child(#{$n})
 				@include fade-in-dur(.5s + ($n * 1s))
-			
+
+@keyframes throb
+	0%
+		scale: 100%
+	50%
+		scale: 130%
+	100%
+		scale: 100%
+
+@keyframes liftoff
+	100%
+		transform: translateY(-100vmax)
+
+@keyframes rainbow
+	0%
+		background-color: red
+	14%
+		background-color: orange
+	29%
+		background-color: yellow
+	49%
+		background-color: lime
+	57%
+		background-color: green
+	71%
+		background-color: blue
+	86%
+		background-color: purple
+	100%
+		background-color: indigo
+
+$chip-animations: throb 3s ease-in-out 0s infinite forwards, fade-in 1s 3.2s 1 forwards
+
+#chip.rainbow
+	animation: $chip-animations, rainbow .5s linear 0s 2, liftoff 1s 1
+
+#chip
+	position: absolute
+	bottom: 0
+	margin-bottom: 20px
+	margin-left: auto
+	margin-right: auto
+	background-color: #453d3d
+	padding: 1rem
+	border-radius: 50%
+
+	opacity: 0
+	animation: $chip-animations
+
+	transition: all .2s
+
+	&:hover
+		rotate: 360deg
+		background-color: white
+		border: solid black 3px
+
+		& > #chip-arrow
+			border-color: black
+
+	& > #chip-arrow
+		border-color: white
+		border-style: solid solid none none
+		padding: .2rem
+		transform: rotate(135deg)
+		border-width: 4px
+
+[data-even] > .first-description
+	text-align: right
+
+.parallax-image-text-section
+	display: grid
+	grid-template-columns: 1fr 2fr
+	overflow: hidden
+
+	&[data-even]
+		grid-template-columns: 2fr 1fr
+		margin-right: 0
+
+		&>.first-description
+			display: block
+			// width: fit-content
+
+	&>.first-description
+		padding: 1rem
+		width: 80%
+
+	&>[data-parallax-image-split]
+		min-width: max-content
+	
+.parallax-items > :not(:last-child)
+	padding-bottom: 8rem

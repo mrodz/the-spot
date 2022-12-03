@@ -1,52 +1,22 @@
-import React, { useState, FC, useContext, Context, createContext, useEffect } from 'react';
-import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
-import './ParallaxImageSplit.sass';
-// import { DocumentDimensions, onWindowResize, styles } from '../..';
+import React, { useState, FC } from 'react'
+import { Parallax, ParallaxProvider } from 'react-scroll-parallax'
+import './ParallaxImageSplit.sass'
 
 /**
  * Denotes which half of the image you're referring to: L(eft) or R(ight).
  */
-type dir = 'L' | 'R';
+type dir = 'L' | 'R'
 
 type DocumentDimensions = {
 	width: number,
 	height: number
 }
 
-// let ParallaxImageSplitContext = createContext<DocumentDimensions>({
-// 	width: document.body.clientWidth,
-// 	height: document.body.clientHeight
-// })
-
-/**
- * Use to apply speeds conditionally, according to document dimensions.
- */
-const ParallaxImageSplitProvider = (props: any) => {
-	// const [dim, setDim] = useState({
-	// 	width: document.body.clientWidth,
-	// 	height: document.body.clientHeight
-	// });
-
-	// useEffect(() => {
-	// 	onWindowResize(d => {
-	// 		setDim(d);
-	// 	})
-	// }, [])
-
-	return (
-		<>
-			{/* <ParallaxImageSplitContext.Provider value={dim}> */}
-			{props?.children}
-			{/* </ParallaxImageSplitContext.Provider> */}
-		</>
-	)
-}
-
 interface ParallaxImageSplitProps {
 	/**
 	 * the path to image to be loaded here.
 	 * obtain using:
-	 * import %VARIABLE_NAME% from "%RELATIVE_FILE_PATH%";
+	 * import %VARIABLE_NAME% from "%RELATIVE_FILE_PATH%"
 	 */
 	fileName: string,
 	/**
@@ -88,30 +58,9 @@ interface ParallaxImageSplitProps {
 			 */
 			lagging: number
 		}
-		dimensionContext?: Context<DocumentDimensions>
 	},
 	className?: string,
 	onLoad?: () => void,
-}
-
-/**
- * Allows the supplying of a width parameter, but not a height.
- * 
- * Sets the width of the container/rendering of the original image
- * @deprecated
- */
-interface ParallaxImageSplitPropsWidth extends ParallaxImageSplitProps {
-	width?: string | (() => string)
-}
-
-/**
- * Allows the supplying of a height parameter, but not a width.
- * 
- * Sets the height of the container/rendering of the original image
- * @deprecated
- */
-interface ParallaxImageSplitPropsHeight extends ParallaxImageSplitProps {
-	height?: string | (() => string)
 }
 
 /**
@@ -180,43 +129,41 @@ interface ParallaxImageSplitPropsHeight extends ParallaxImageSplitProps {
 const ParallaxImageSplit: FC<ParallaxImageSplitProps> = React.memo((props) => {
 	// need to use states because images must load before we can 
 	// read dimensions, which takes time.
-	const [leftProduct, setLeftProduct] = useState('');
-	const [rightProduct, setRightProduct] = useState('');
+	const [leftProduct, setLeftProduct] = useState('')
+	const [rightProduct, setRightProduct] = useState('')
 
-	// let dim = useContext<DocumentDimensions>(props?.speeds?.dimensionContext ?? ParallaxImageSplitContext);
-
-	let img = new Image();
-	img.src = props.fileName;
+	let img = new Image()
+	img.src = props.fileName
 
 	img.onload = () => {
 		function createCanvas(placement: dir) {
-			const canvas = document.createElement('canvas');
+			const canvas = document.createElement('canvas')
 
-			canvas.width = img.width / 2;
-			canvas.height = img.height;
+			canvas.width = img.width / 2
+			canvas.height = img.height
 
 			// casting to get rid of typescript warnings.
-			const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+			const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
 
-			ctx.setTransform(1, 0, 0, 1, 0, 0);
-			ctx.imageSmoothingQuality = 'high';
+			ctx.setTransform(1, 0, 0, 1, 0, 0)
+			ctx.imageSmoothingQuality = 'high'
 
 			// if left, start at the origin; if right, start midway through.
-			const start = placement === 'L' ? 0 : img.width / 2;
+			const start = placement === 'L' ? 0 : img.width / 2
 
-			ctx.drawImage(img, start, 0, img.width, img.height, 0, 0, img.width, img.height);
+			ctx.drawImage(img, start, 0, img.width, img.height, 0, 0, img.width, img.height)
 
 			// Convert to base64; return this
-			return canvas.toDataURL('image/jpeg');
+			return canvas.toDataURL('image/jpeg')
 		}
 
-		setLeftProduct(createCanvas('L'));
-		setRightProduct(createCanvas('R'));
+		setLeftProduct(createCanvas('L'))
+		setRightProduct(createCanvas('R'))
 
 		props?.onLoad?.()
-	};
+	}
 
-	const leading = (props?.leading ?? 'L') === 'L';
+	const leading = (props?.leading ?? 'L') === 'L'
 
 	const mobile = false //dim.width < styles.switchToMobileView
 
@@ -228,8 +175,8 @@ const ParallaxImageSplit: FC<ParallaxImageSplitProps> = React.memo((props) => {
 		lagging: !mobile ? -100 : -50
 	}
 
-	const prefixAlt = (prefix: string): string => Array.isArray(props.alt) ? props.alt[0] : prefix + props.alt;
-	const speed = (l: boolean) => l ? speeds.leading : speeds.lagging;
+	const prefixAlt = (prefix: string): string => Array.isArray(props.alt) ? props.alt[0] : prefix + props.alt
+	const speed = (l: boolean) => l ? speeds.leading : speeds.lagging
 
 	return (
 		<>
@@ -237,17 +184,16 @@ const ParallaxImageSplit: FC<ParallaxImageSplitProps> = React.memo((props) => {
 				<div className={'parallax-image-wrapper-1 ' + (props?.className ?? '')} data-parallax-image-split>
 					<div className='parallax-image-wrapper'>
 						<Parallax speed={speed(leading)}>
-							<img data-fade-first className='parallax-image' src={leftProduct} loading='lazy' alt={props?.alt ? prefixAlt('Left') : ''} />
+							<img data-fade-first className='parallax-image' src={leftProduct} loading='lazy' alt={props?.alt ? prefixAlt('left half, ') : ''} />
 						</Parallax>
 						<Parallax speed={speed(!leading)}>
-							<img data-fade-second className='parallax-image' src={rightProduct} loading='lazy' alt={props?.alt ? prefixAlt('Right') : ''} />
+							<img data-fade-second className='parallax-image' src={rightProduct} loading='lazy' alt={props?.alt ? prefixAlt('right half, ') : ''} />
 						</Parallax>
 					</div>
 				</div>
 			</ParallaxProvider>
 		</>
-	);
-});
+	)
+})
 
-export default ParallaxImageSplit;
-export { ParallaxImageSplitProvider }
+export default ParallaxImageSplit

@@ -4,6 +4,10 @@ body {
 	font-family: Gotham A,Gotham B,sans-serif;
 }
 
+.text-content {
+	color: #918888;
+}
+
 .center-h {
 	display: flex;
 	justify-content: center;

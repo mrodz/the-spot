@@ -90,11 +90,16 @@
 		flex-direction: column
 		font-size: 150%
 		text-align: right
-		color: #918888
 
 		@for $n from 1 through 2
 			& > span:nth-child(#{$n})
 				@include fade-in-dur(.5s + ($n * 1s))
+
+.reviews-title
+	margin-top: 6.5rem
+	margin-bottom: 6.5rem
+	text-align: center
+	font-size: 350%
 
 @keyframes throb
 	0%
@@ -186,3 +191,18 @@ $chip-animations: throb 3s ease-in-out 0s infinite forwards, fade-in 1s 3.2s 1 f
 	
 .parallax-items > :not(:last-child)
 	padding-bottom: 8rem
+
+.reviews
+	// border-top: solid black 3px
+	margin-top: 3rem
+
+.landing-nav
+	width: 100%
+	display: grid
+	grid-template-columns: 1fr 1fr 1fr
+	margin-top: 6rem
+
+	& > button
+		@for $n from 1 through 3
+			&:nth-child(#{$n})
+				@include fade-in-dur(.2s + ($n * .1s))

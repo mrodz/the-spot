@@ -1,5 +1,5 @@
-$white: rgb(243, 243, 243)
-  
+@use "./colors"
+    
 .blurbs-wrapper
   display: flex
   flex-direction: column
@@ -15,7 +15,7 @@ $white: rgb(243, 243, 243)
   position: -webkit-sticky // Safari
   position: sticky
   // justify-self: flex-start
-  background-color: $white
+  background-color: colors.$white
   top: 20px
   border-radius: 100vmax
   padding: 3rem
@@ -28,8 +28,8 @@ $white: rgb(243, 243, 243)
   background-color: #fff
 
 .appreciation
-  background-color: rgb(75, 54, 21)
-  color: $white
+  background-color: colors.$splash-primary
+  color: colors.$white
   text-align: center
   padding: 1rem
   z-index: 50

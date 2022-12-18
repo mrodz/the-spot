@@ -1,3 +1,5 @@
+@use "../colors"
+
 @keyframes fade-in
 	0%
 		opacity: 0
@@ -35,7 +37,7 @@
 	0%, 100%
 		transform: translateY(-16px)
 	50%
-		transform: translateY(16px) 
+		transform: translateY(16px)
 
 @keyframes moving-gradient
 	0%
@@ -52,7 +54,7 @@
 @keyframes blow-down
 	100%
 		transform: scale(100%)
-		
+
 .welcome-title
 	flex-grow: 1
 	display: flex
@@ -68,7 +70,7 @@
 		text-transform: uppercase
 		background: linear-gradient(-45deg, #70301c, #4c353e, #744010, #9e4d21)
 		animation: smash-drop 1s 1 cubic-bezier(.17,.67,.83,.67) forwards, moving-gradient 15s ease infinite, //blow-down .5s 0s 1 forwards
-		
+
 		transition: all .5s
 
 		background-size: 400% 400%
@@ -83,7 +85,6 @@
 			scale: 120%
 			animation: smash-drop 1s 1 cubic-bezier(.17,.67,.83,.67) forwards, moving-gradient 15s ease infinite, //blow-up .5s 0s 1 forwards
 
-
 	& #subtitles
 		margin-top: 1rem
 		display: flex
@@ -95,11 +96,25 @@
 			& > span:nth-child(#{$n})
 				@include fade-in-dur(.5s + ($n * 1s))
 
+.reviews
+	// margin-top: 2rem
+	box-sizing: border-box
+	background-color: colors.$splash-primary
+	padding: 3rem
+	margin-top: 6rem
+
 .reviews-title
-	margin-top: 6.5rem
-	margin-bottom: 6.5rem
+	// margin-top: 6.5rem
+	color: colors.$text-primary-contrast
+	font-weight: bold
+	margin-bottom: 2rem
 	text-align: center
 	font-size: 350%
+
+.reviews-subtitle
+	text-align: center
+	color: colors.$text-secondary
+	font-size: 175%
 
 @keyframes throb
 	0%
@@ -188,13 +203,9 @@ $chip-animations: throb 3s ease-in-out 0s infinite forwards, fade-in 1s 3.2s 1 f
 
 	&>[data-parallax-image-split]
 		min-width: max-content
-	
+
 .parallax-items > :not(:last-child)
 	padding-bottom: 8rem
-
-.reviews
-	// border-top: solid black 3px
-	margin-top: 3rem
 
 .landing-nav
 	width: 100%

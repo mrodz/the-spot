@@ -81,6 +81,10 @@ const Landing: LandingElement = () => {
 				<FadeInSection>
 					<section className="reviews">
 						<div className="reviews-title">a neighborhood classic.</div>
+						{/* <FadeInSection delay={500}> */}
+						<div className="reviews-subtitle">proudly serving our community since 2004</div>
+						{/* https://text2image.com/en/ */}
+						{/* </FadeInSection> */}
 					</section>
 				</FadeInSection>
 			</div>

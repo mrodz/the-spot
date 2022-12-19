@@ -1,14 +1,13 @@
-import React from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import './App.sass'
 import { Landing, NotFound } from './pages'
+import './App.sass'
 
 function App() {
 	const location = useLocation()
 
 	return (
 		<div className="App">
-			<div className="blurbs-wrapper">
+			<div className="blurbs-wrapper" {...location.pathname !== '/' && { style: { height: 'unset' } }}>
 				<div className="top-blurbs w-100">
 					<div className="appreciation">Thank you for your patronage during the lockdown! &#x1F637;</div>
 				</div>

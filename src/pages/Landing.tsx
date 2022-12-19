@@ -1,12 +1,13 @@
-import "./Landing.sass"
 import { useState, memo, MemoExoticComponent, useEffect } from "react"
+import { Button } from "@mui/material"
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { Link } from "react-router-dom"
+import FadeInSection from "../components/FadeInSection"
 import ParallaxImageSplit from "../components/ParallaxImageSplit"
 import landingImage from "../images/landing.png"
 import boba from "../images/boba.jpeg"
-import { Button } from "@mui/material"
-import FadeInSection from "../components/FadeInSection"
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery'
+import "./Landing.sass"
 
 type LandingElement = {
 	(): JSX.Element,
@@ -123,8 +124,8 @@ const RainbowButton = memo(() => {
  * @returns JSX
  */
 Landing.Splash = memo(() => {
-	const theme = useTheme();
-	const matches = useMediaQuery(theme.breakpoints.down(1150));
+	const theme = useTheme()
+	const matches = useMediaQuery(theme.breakpoints.down(1150))
 
 	useEffect(() => {
 		console.log(matches)
@@ -144,9 +145,9 @@ Landing.Splash = memo(() => {
 							<span>est. 2004</span>
 						</div>
 						<nav className="landing-nav">
-							<Button size={matches ? "small" : "medium"} sx={{ marginRight: '1rem' }} variant="outlined">Menu</Button>
-							<Button size={matches ? "small" : "medium"} variant="outlined">Location</Button>
-							<Button size={matches ? "small" : "medium"} sx={{ marginLeft: '1rem' }} variant="outlined">Our Story</Button>
+							<Button component={Link} to="/menu" size={matches ? "small" : "medium"} sx={{ marginRight: '1rem' }} variant="outlined">Menu</Button>
+							<Button component={Link} to="/location" size={matches ? "small" : "medium"} variant="outlined">Location</Button>
+							<Button component={Link} to="/about" size={matches ? "small" : "medium"} sx={{ marginLeft: '1rem' }} variant="outlined">Our Story</Button>
 						</nav>
 					</div>
 				</div>

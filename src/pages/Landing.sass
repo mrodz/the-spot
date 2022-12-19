@@ -67,6 +67,8 @@
 
 	& #title
 		font-size: 600%
+		max-width: fit-content
+		margin-left: auto
 		text-transform: uppercase
 		background: linear-gradient(-45deg, #70301c, #4c353e, #744010, #9e4d21)
 		animation: smash-drop 1s 1 cubic-bezier(.17,.67,.83,.67) forwards, moving-gradient 15s ease infinite, //blow-down .5s 0s 1 forwards
@@ -209,6 +211,7 @@ $chip-animations: throb 3s ease-in-out 0s infinite forwards, fade-in 1s 3.2s 1 f
 
 .landing-nav
 	width: 100%
+	box-sizing: border-box
 	display: grid
 	grid-template-columns: 1fr 1fr 1fr
 	margin-top: 6rem
@@ -217,3 +220,85 @@ $chip-animations: throb 3s ease-in-out 0s infinite forwards, fade-in 1s 3.2s 1 f
 		@for $n from 1 through 3
 			&:nth-child(#{$n})
 				@include fade-in-dur(.2s + ($n * .1s))
+
+@media screen and (max-width: 1350px)
+	.splash-image > img
+		width: 70%
+
+	.splash-image
+		padding-left: 0
+		padding-right: 0
+
+	.blurbs-wrapper, .landing-nav
+		font-size: 70%
+
+	.appreciation
+		font-size: 170%
+
+@media screen and (max-width: 1050px)
+	.welcome-title > *
+		margin-right: 3rem
+	.blurbs-wrapper
+		font-size: 60%
+		& #title
+			padding-left: 1rem
+			padding-right: 1rem
+	.landing-nav
+		margin-top: 4rem
+
+@media screen and (max-width: 850px)
+	.splash-image
+		width: 50%
+	.blurbs-wrapper #title
+		font-size: 500%
+	.landing-nav
+		margin-top: 2rem
+
+///
+/// MAJOR SHIFT IN LAYOUT
+///
+@media screen and (max-width: 720px)
+	.welcome-title
+		justify-content: unset
+
+	.welcome-title > div
+		width: 100%
+		margin-right: 0
+
+		& #title
+			animation: fade-in 0.75s 1 forwards, moving-gradient 15s ease infinite
+			margin-right: 5rem
+
+		& nav.landing-nav
+			margin-top: 0
+			padding: 4rem
+			width: 100%
+			box-sizing: border-box
+
+	a#chip, .splash-image
+		display: none
+
+	.mobile-welcome[data-first-cls]
+		display: unset
+		font-size: 200%
+		text-align: justify
+		margin-left: 6rem
+		margin-right: 6rem
+		box-sizing: border-box
+
+	.blurbs-wrapper 
+		& #title
+			font-size: 800%
+			text-align: center
+			max-width: initial
+			margin-top: 2rem
+			margin-left: 5rem
+
+		& #subtitles
+			max-width: initial
+			text-align: center
+			font-size: 200%
+
+	.splash-wrapper
+		flex-grow: unset
+		flex-direction: column-reverse

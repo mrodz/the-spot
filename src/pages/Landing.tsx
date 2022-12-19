@@ -1,10 +1,12 @@
 import "./Landing.sass"
-import { useState, memo, MemoExoticComponent } from "react"
+import { useState, memo, MemoExoticComponent, useEffect } from "react"
 import ParallaxImageSplit from "../components/ParallaxImageSplit"
 import landingImage from "../images/landing.png"
 import boba from "../images/boba.jpeg"
 import { Button } from "@mui/material"
 import FadeInSection from "../components/FadeInSection"
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 type LandingElement = {
 	(): JSX.Element,
@@ -121,11 +123,18 @@ const RainbowButton = memo(() => {
  * @returns JSX
  */
 Landing.Splash = memo(() => {
+	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.down(1150));
+
+	useEffect(() => {
+		console.log(matches)
+	}, [matches])
+
 	return (
 		<>
 			<div className="splash-wrapper">
 				<div className="splash-image">
-					<img alt="" src={landingImage} />
+					<img alt="" src={landingImage} /*width="571" height="583"*/ />
 				</div>
 				<div className="welcome-title">
 					<div>
@@ -135,13 +144,16 @@ Landing.Splash = memo(() => {
 							<span>est. 2004</span>
 						</div>
 						<nav className="landing-nav">
-							<Button sx={{ marginRight: '1rem' }} variant="outlined">Menu</Button>
-							<Button variant="outlined">Location</Button>
-							<Button sx={{ marginLeft: '1rem' }} variant="outlined">Our Story</Button>
+							<Button size={matches ? "small" : "medium"} sx={{ marginRight: '1rem' }} variant="outlined">Menu</Button>
+							<Button size={matches ? "small" : "medium"} variant="outlined">Location</Button>
+							<Button size={matches ? "small" : "medium"} sx={{ marginLeft: '1rem' }} variant="outlined">Our Story</Button>
 						</nav>
 					</div>
 				</div>
 			</div>
+
+			<section className="mobile-welcome" data-first-cls>
+				In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.			</section>
 
 			<div className="center-h">
 				<RainbowButton />

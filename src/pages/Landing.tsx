@@ -131,12 +131,22 @@ Landing.Splash = memo(() => {
 		console.log(matches)
 	}, [matches])
 
+	const SplashImage = memo(({ second }: { second?: boolean }) => {
+		return (
+			<div className="splash-image" {...!!second ? { "data-second-cls": true } : {}}>
+				<img alt="" src={landingImage} /*width="571" height="583"*/ />
+			</div>
+		)
+	})
+
 	return (
 		<>
 			<div className="splash-wrapper">
-				<div className="splash-image">
-					<img alt="" src={landingImage} /*width="571" height="583"*/ />
-				</div>
+				<SplashImage />
+				{/* {splashImage(false)} */}
+				{/* <div className="splash-image">
+					<img alt="" src={landingImage} />
+				</div> */}
 				<div className="welcome-title">
 					<div>
 						<div id="title">The Spot</div>
@@ -144,6 +154,14 @@ Landing.Splash = memo(() => {
 							<span>café &bull; lounge &bull; pastries</span>
 							<span>est. 2004</span>
 						</div>
+
+						<SplashImage second />
+						{/* {splashImage(true)} */}
+
+						{/* <div className="splash-image" data-second-cls>
+							<img alt="" src={landingImage} width="571" height="583" />
+						</div> */}
+
 						<nav className="landing-nav">
 							<Button component={Link} to="/menu" size={matches ? "small" : "medium"} sx={{ marginRight: '1rem' }} variant="outlined">Menu</Button>
 							<Button component={Link} to="/location" size={matches ? "small" : "medium"} variant="outlined">Location</Button>
@@ -154,7 +172,8 @@ Landing.Splash = memo(() => {
 			</div>
 
 			<section className="mobile-welcome" data-first-cls>
-				In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.			</section>
+				In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.
+			</section>
 
 			<div className="center-h">
 				<RainbowButton />
